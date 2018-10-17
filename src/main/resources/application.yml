@@ -1,0 +1,20 @@
+server: 
+  port: 9009
+  
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    show-sql: true
+      
+      
+swagger: 
+  title: Basic MS App
+  description: This is a basic ms app for demo purpose
+  version: 1.0
+  contact-name: snmaddula
+  contact-url: 
+  contact-email: sn_maddula@outlook.com
+    
