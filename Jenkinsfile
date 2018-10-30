@@ -86,15 +86,18 @@ pipeline {
 			}
 		}
 
-/*
+
 		stage("SourceClear") {
 			steps{
 				script{
-					 sh "export PATH=${PATH}:/opt/maven/bin && export SRCCLR_API_TOKEN=${srcclr_api_token} && /opt/srcclr-3.0.18/bin/srcclr scan . --debug" 
+					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${dev_onprim_credentials_id}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+					 	sh "echo \"sudo su && cd ${WORKSPACE} && /opt/srcclr/3.1.4/bin/srcclr --profile='MS Accelerator' scan .\" > srcclr_run.sh"
+					 	sh "cat srcclr_run.sh | sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no $USERNAME@${dev_onprim_server}"  
+					 }
 				}
 			}
 		}
-*/
+
 
 		stage("Clair") {
 			steps{
