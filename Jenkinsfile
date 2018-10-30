@@ -89,7 +89,7 @@ pipeline {
 		stage("SourceClear") {
 			steps{
 				script{
-					sh "export PATH=${PATH}:/opt/maven/bin && export SRCCLR_API_TOKEN=${srcclr_api_token} && /opt/srcclr-3.0.18/bin/srcclr scan . --debug" 
+					// sh "export PATH=${PATH}:/opt/maven/bin && export SRCCLR_API_TOKEN=${srcclr_api_token} && /opt/srcclr-3.0.18/bin/srcclr scan . --debug" 
 				}
 			}
 		}
