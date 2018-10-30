@@ -6,7 +6,7 @@
 
 	<groupId>com.pochub.ms</groupId>
 	<artifactId>basic-ms-app</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>basic-ms-app</name>
 	<description>basic ms app with simple crud and swagger enabled</description>
