@@ -115,16 +115,16 @@ pipeline {
 				script{
 					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${dev_onprim_credentials_id}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
 						withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${docker_credentials_id}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS']]) {
-							sh"rm -rf deploy_dev.sh && echo "docker login ${docker_registry} -u $DOCKER_USER -p $DOCKER_PASS" >> deploy_dev.sh"
-							sh"echo "docker stop ${service_image}" >> deploy_dev.sh"
-							sh"echo "docker rm -f ${service_image}" >> deploy_dev.sh"
+							sh"rm -rf deploy_dev.sh && echo \"docker login ${docker_registry} -u $DOCKER_USER -p $DOCKER_PASS\" >> deploy_dev.sh"
+							sh"echo \"docker stop ${service_image}\" >> deploy_dev.sh"
+							sh"echo \"docker rm -f ${service_image}\" >> deploy_dev.sh"
 							def DOCKER_ENV = ''
 							for (String i : readFile('jenkins-env.properties').split("\r?\n")) {
 								if(i.matches("docker_config_(.*)")){
 									DOCKER_ENV = $DOCKER_ENV + ' -e ' + i.replace('docker_config_','')
 								}
 							}
-							sh"set +x && echo "docker run -d -t -i $DOCKER_ENV -p ${service_port}:${container_port} --name=${service_image} ${docker_registry}/${service_image}:${SERVICE_TAG}" >> deploy_dev.sh"
+							sh"set +x && echo \"docker run -d -t -i $DOCKER_ENV -p ${service_port}:${container_port} --name=${service_image} ${docker_registry}/${service_image}:${SERVICE_TAG}\" >> deploy_dev.sh"
 							sh "cat deploy_dev.sh | sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no $USERNAME@${dev_onprim_server}"
 							sh"rm -rf deploy_dev.sh"
 						}
