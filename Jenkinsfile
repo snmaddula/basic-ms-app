@@ -53,7 +53,7 @@ pipeline {
 							}
 						}
 
-						def response2 = httpRequest url : sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"], authentication: 'sonar-quality-auth-credentials-id'
+						def response2 = httpRequest url : sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"], authentication: 'sonar-quality-auth'
 						def qualitygate =  readJSON text: response2.content
 						echo qualitygate.toString()
 
