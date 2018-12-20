@@ -1,6 +1,4 @@
-server: 
-  port: 9009
-  
+
 spring:
   h2:
     console:
