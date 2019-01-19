@@ -1,11 +1,11 @@
  
-FROM openjdk:8u181-jdk-alpine
+FROM snmaddula/ubuntu-java 
 
-VOLUME /tmp
+RUN add-apt-repository ppa:andrei-pozolotin/maven3 -y && apt-get update && apt-get install maven3 -y
 
 RUN git clone https://github.com/snmaddula/basic-ms-app.git
 WORKDIR "/basic-ms-app"
-RUN runapp
+RUN mvn clean spring-boot:run 
 
 # CMD ["/bin/sh", "-c",  ". /etc/profile && java -Djava.security.egd=file:/dev/./urandom -jar target/app.jar"]
 CMD echo "DONE!"
